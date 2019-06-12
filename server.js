@@ -1,7 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const errorhandler = require('errorhandler')
-const mongodb = require('mongodb')
+const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser')
 
 const url = 'mongodb://localhost:27017/edx-course-db'
@@ -11,8 +11,13 @@ let app = express()
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
-mongodb.MongoClient.connect(url, (error, db) => {
-    if (error) return process.exit(1)
+const client = new MongoClient(url, { useNewUrlParser: true });
+client.connect(err => {
+    const db = client.db("edx-course-db");
+    // perform actions on the collection object
+    if (err) return process.exit(1)
+
+    console.log('Connected');
 
     app.get('/accounts', (req, res, next) => {
         db.collection('accounts')
@@ -20,7 +25,6 @@ mongodb.MongoClient.connect(url, (error, db) => {
             .toArray((error, accounts) => {
                 if (error) return next(error)
             })
-
     })
 
     app.post('/accounts', (req, res, next) => {
@@ -29,7 +33,6 @@ mongodb.MongoClient.connect(url, (error, db) => {
             if (error) return next(error)
             res.send(results)
         })
-
     })
 
     app.put('/accounts/:id', (req, res) => {
