@@ -1,11 +1,11 @@
 const express = require('express')
 const logger = require('morgan')
 const errorhandler = require('errorhandler')
-const mongodb = require('mongodb')
+const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser')
 
 
-const MongoClient = require('mongodb').MongoClient;
+//const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 const url = 'mongodb://localhost:27017/myproject';
@@ -19,8 +19,8 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 
 
-client.connect(url,(error,db)=> {
-    assert.equal(null, err);
+client.connect(url,(error,db1)=> {
+    assert.equal(null, error);
     console.log("Connected successfully to server");
   
     const db = client.db(dbName);
@@ -38,7 +38,6 @@ client.connect(url,(error,db)=> {
                 if (error) return next(error)
                 client.close();
             })
-
     })
 
     app.post('/accounts', (req, res, next) => {
@@ -48,7 +47,6 @@ client.connect(url,(error,db)=> {
             res.send(results)
             client.close();
         })
-
     })
 
     app.put('/accounts/:id', (req, res) => {
