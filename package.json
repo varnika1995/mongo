@@ -1,7 +1,6 @@
 {
   "name": "demo5",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,5 +16,15 @@
     "mongodb": "^3.2.7",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varnika1995/mongo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varnika1995/mongo/issues"
+  },
+  "homepage": "https://github.com/varnika1995/mongo#readme",
+  "description": ""
 }
