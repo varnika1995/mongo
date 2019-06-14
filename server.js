@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 //const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-const url = 'mongodb://localhost:27017/myproject';
+const url = 'mongodb://localhost:27017';
 
 const dbName = 'myproject';
 const client = new MongoClient(url);
@@ -19,8 +19,8 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 
 
-client.connect(url,(error,db1)=> {
-    assert.equal(null, error);
+client.connect(url,(err,db1)=> {
+    assert.equal(null, err);
     console.log("Connected successfully to server");
   
     const db = client.db(dbName);
@@ -36,7 +36,7 @@ client.connect(url,(error,db1)=> {
             .find({}, { sort: { _id: -1 } })
             .toArray((error, accounts) => {
                 if (error) return next(error)
-                client.close();
+                
             })
     })
 
@@ -45,7 +45,7 @@ client.connect(url,(error,db1)=> {
         db.collection('accounts').insert(newAccount, (error, results) => {
             if (error) return next(error)
             res.send(results)
-            client.close();
+            
         })
     })
 
