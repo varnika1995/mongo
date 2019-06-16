@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ghibli App</title>
+    <link href="style.css" rel="stylesheet" />
+
+    <script language="JavaScript">
+
+    function showInput() {
+
+      var data = {mail: document.getElementById("mail").value, 
+      name: document.getElementById("name").value,
+      last_name: document.getElementById("last_name").value,
+      email: document.getElementById("email").value,
+      contact: document.getElementById("contact").value,
+      password: document.getElementById("password").value,
+      birthday: document.getElementById("birthday").value,
+    }
+body={
+  method: 'POST', // *GET, POST, PUT, DELETE, etc.
+  mode:'cors',
+  headers:{
+    'Content-Type':'application/json'
+  },
+  body: JSON.stringify(data), // body data type must match "Content-Type" header
+}
+      console.log(document.getElementById("mail"));
+      console.log(document.getElementById("name"));
+      console.log(document.getElementById("last_name"));
+      console.log(document.getElementById("email"));
+      console.log(document.getElementById("contact"));
+      console.log(document.getElementById("password"));
+      console.log(document.getElementById("birthday"));
+
+ 
+    
+
+      fetch(url, body).then(
+       function (response) {
+         console.log(response.headers.get('Content-Type'));
+         if (response.status !== 200) {
+           console.log('Looks like there was a problem. Status Code: ' +
+             response.status);
+           return;
+         }
+
+         // Examine the text in the response
+         response.json().then(function (data) {
+           console.log(data);
+         });
+       })
+       .catch(function (err) {
+         console.log('Fetch Error :-S', err);
+       });
+   }
+    
+var request = new XMLHttpRequest()
+var url = 'http://localhost:4000/accounts';
+
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <form>
+        <table>
+          <tr>
+            <td> <p style="font-size: 35px; text-align: center;  height: 20px"> <strong> Create an Account </strong></p> </td>
+        </tr>	
+          <tr>
+              <td> <input type="text" name="First name" placeholder="First Name" class="f2" id="name" >
+                   <input type="text" name="last name" placeholder="Last Name" class="f3" id="last_name"  > </td>
+        </tr>
+        <tr>
+            <td> <input type="email" name="mail" placeholder="Enter your E-mail" class="f4" id="mail" > </td>
+        </tr>
+        <tr>
+            <td> <input type="email" name="email" placeholder="Re-Enter your E-mail" class="f5" id="email" > </td>
+        </tr>
+        <tr>
+            <td> <input type="tel" name="phone" maxlength="10" minlength="10" placeholder="contact number" class="f6" id="contact" > </td>
+        </tr>
+        <tr>
+            <td> <input type="password" name="password" maxlength="20" minlength="8"placeholder="Create your password" class="f6" id="password" > </td>
+        </tr>
+          <tr>
+                <td> <strong> Birthday <strong> </td>
+        </tr>
+        <tr>
+            <td> <input type ="date" name="date" placeholder="date" class="date" id="birthday" > </td>
+        </tr>	
+
+
+        <tr> 
+            <td>
+              Gender <input type="radio" name="gender"><span style ="font-size: 20px" id="m"> Male</span>
+              <input type="radio" name="gender"><span style ="font-size: 20px" id="f"> Female</span>
+          </td>
+        </tr>
+        
+        <tr>
+            <td>
+
+              
+            <button type="button" onclick="showInput()" class="ac1"> Sign up  <br> 
+            <button type= "reset"class="ac1"> Reset</button> <br> 
+          
+            
+            
+          </td> 
+        </tr>	
+  
+      </table>
+
+   
+</form>
+    
+  </body>
+</html>
